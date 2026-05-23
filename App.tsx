@@ -22,7 +22,9 @@ import {
 } from 'lucide-react';
 import { PROJECTS, EXPERIENCES, SKILLS, ICON_MAP } from './constants';
 
-const PROFILE_IMAGE_SRC = "https://lh3.googleusercontent.com/d/1eQRCGkVABlw82173ZWZ55kAd29jWUMf4"; 
+import profilePic from './vvssm-profile.jpg';
+
+const PROFILE_IMAGE_SRC = profilePic; 
 
 // --- LOADING SCREEN COMPONENT ---
 const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
@@ -452,7 +454,7 @@ const EducationSection: React.FC = () => {
                   </motion.div>
                 </div>
 
-                <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pr-24' : 'md:pl-24'}`}>
+                <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pl-24' : 'md:pr-24'}`}>
                   <motion.div 
                     initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -556,33 +558,34 @@ const App: React.FC = () => {
         <div className="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] bg-indigo-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'glass py-4 shadow-2xl' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0A0F14]/80 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            className="text-2xl font-bold font-['Space_Grotesk'] tracking-tight cursor-pointer text-white" 
+          <div 
+            className="text-xl font-bold font-['Space_Grotesk'] tracking-tighter cursor-pointer text-white" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             VVSSM
-          </motion.div>
-          <div className="hidden md:flex gap-8 items-center uppercase tracking-widest text-[10px] font-semibold">
-            {navLinks.map((link, i) => (
-              <motion.a 
+          </div>
+          
+          <div className="hidden md:flex items-center gap-8 uppercase tracking-[0.2em] text-[10px] font-bold">
+            {navLinks.map((link) => (
+              <a 
                 key={link.name} 
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
                 href={link.href} 
                 onClick={(e) => scrollToSection(e, link.href)} 
-                className="hover:text-teal-400 transition-colors relative group text-slate-400"
+                className="text-slate-400 hover:text-teal-400 transition-colors"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-teal-400 transition-all group-hover:w-full" />
-              </motion.a>
+              </a>
             ))}
           </div>
-          <button className="md:hidden z-50 text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X size={28} /> : <Menu size={28} />}</button>
+
+          <button 
+            className="md:hidden text-white" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </nav>
 
@@ -701,51 +704,93 @@ const App: React.FC = () => {
         <section 
           id="about" 
           ref={aboutRef} 
-          className="py-24 px-6 scroll-mt-24 relative overflow-hidden bg-[#0A0F14] flex items-center justify-center min-h-[80vh]"
-          style={{ perspective: '1000px' }}
+          className="py-32 px-6 scroll-mt-24 relative overflow-hidden bg-[#0A0F14] flex items-center justify-center min-h-screen"
+          style={{ perspective: '2000px' }}
         >
+          {/* Animated Background Ornament */}
+          <motion.div 
+            style={{ 
+              opacity: entranceOpacity,
+              scale: useTransform(entranceProgress, [0, 1], [0.5, 1.2]),
+              rotate: useTransform(entranceProgress, [0, 1], [0, 45])
+            }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none z-0"
+          />
+
           <motion.div 
             style={{ 
               y: entranceY, 
               scale: entranceScale, 
               opacity: entranceOpacity,
-              rotateX: entranceRotateX
+              rotateX: entranceRotateX,
+              transformStyle: 'preserve-3d'
             }}
-            className="max-w-4xl mx-auto relative z-10 text-center"
+            className="max-w-5xl mx-auto relative z-10 text-center"
           >
             <div>
-              <motion.h2 
-                {...sectionHeaderVariants}
-                className="text-3xl md:text-5xl font-bold mb-10 flex items-center justify-center gap-4 text-white"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, y: 50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 260, 
+                  damping: 20,
+                  duration: 1 
+                }}
               >
-                <span className="text-teal-400 font-mono text-xl">01.</span> About Me
-              </motion.h2>
-              <div className="space-y-8 text-slate-400 leading-relaxed text-lg md:text-2xl font-light max-w-3xl mx-auto">
-                <p>
-                  I am a first-year B.Tech student at <span className="text-white font-medium">Christ University, Bangalore</span>, 
-                  proudly enrolled in the prestigious <span className="text-teal-400 font-medium italic">Indo-German exchange program</span>. 
-                  This cross-cultural academic path allows me to bridge global engineering standards with local innovation.
-                </p>
-                <p>
-                  My core interests lie at the heart of <span className="text-teal-400">Robotics</span> and 
-                  <span className="text-teal-400"> Artificial Intelligence</span>. I am fascinated by the potential of 
-                  autonomous systems to augment human capability and solve complex socio-economic challenges.
-                </p>
+                <h2 className="text-4xl md:text-7xl font-bold mb-12 flex items-center justify-center gap-6 text-white tracking-tighter">
+                  <span className="text-teal-400 font-mono text-2xl">01.</span> About <span className="text-teal-400">Me</span>
+                </h2>
+              </motion.div>
+
+              <div className="space-y-10 text-slate-400 leading-relaxed text-xl md:text-3xl font-light max-w-4xl mx-auto">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  I am a first-year B.Tech student at <span className="text-white font-medium border-b border-teal-500/30">Christ University, Bangalore</span>, 
+                  proudly enrolled in the prestigious <span className="text-teal-400 font-medium italic">Indo-German exchange program</span>.
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  My core interests lie at the heart of <span className="text-teal-400 font-semibold">Robotics</span> and 
+                  <span className="text-teal-400 font-semibold"> Artificial Intelligence</span>. I am driven by the vision of 
+                  autonomous systems that solve real-world challenges.
+                </motion.p>
               </div>
               
-              <div className="mt-16 flex justify-center gap-12">
+              <div className="mt-24 flex flex-wrap justify-center gap-8 md:gap-20">
                 {[
-                  { val: 'R&D', label: 'Focus Area', color: 'text-teal-400' },
-                  { val: 'AI', label: 'Specialization', color: 'text-white' },
-                  { val: 'GLOBAL', label: 'Perspective', color: 'text-sky-400' }
+                  { val: 'R&D', label: 'Focus Area', color: 'text-teal-400', delay: 0.6 },
+                  { val: 'AI', label: 'Specialization', color: 'text-white', delay: 0.7 },
+                  { val: 'GLOBAL', label: 'Perspective', color: 'text-sky-400', delay: 0.8 }
                 ].map((item, i) => (
-                  <React.Fragment key={i}>
-                    <div className="flex flex-col items-center">
-                      <span className={`text-3xl md:text-4xl font-bold ${item.color}`}>{item.val}</span>
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-slate-500 mt-2 font-semibold">{item.label}</span>
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: item.delay }}
+                    className="flex flex-col items-center group"
+                  >
+                    <div className="relative">
+                      <span className={`text-4xl md:text-6xl font-black ${item.color} transition-transform duration-500 group-hover:scale-110 block`}>{item.val}</span>
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        transition={{ duration: 1, delay: item.delay + 0.2 }}
+                        className="h-px bg-current opacity-20 mt-2"
+                      />
                     </div>
-                    {i < 2 && <div className="w-px h-16 bg-slate-800" />}
-                  </React.Fragment>
+                    <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-slate-500 mt-4 font-bold">{item.label}</span>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -839,8 +884,19 @@ const App: React.FC = () => {
                   transition={{ delay: idx * 0.1 }}
                 >
                   <SpotlightCard className="glass-premium p-12 rounded-[3rem] h-full border-white/5 transition-all duration-700 hover:-translate-y-3">
-                    <div className="p-4 bg-teal-500/10 rounded-2xl text-teal-400 w-fit mb-8 transition-all group-hover:bg-teal-500 group-hover:text-black shadow-[0_10px_30px_rgba(45,212,191,0.1)]">
-                      {ICON_MAP[project.icon] || <Sparkles />}
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="p-4 bg-teal-500/10 rounded-2xl text-teal-400 w-fit transition-all group-hover:bg-teal-500 group-hover:text-black shadow-[0_10px_30px_rgba(45,212,191,0.1)]">
+                        {ICON_MAP[project.icon] || <Sparkles />}
+                      </div>
+                      <motion.a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        className="px-4 py-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 text-[10px] font-bold uppercase tracking-widest hover:bg-teal-500 hover:text-black transition-all shadow-[0_0_20px_rgba(45,212,191,0.3)] animate-pulse hover:animate-none"
+                      >
+                        Live Demo
+                      </motion.a>
                     </div>
                     <h3 className="text-3xl font-bold mb-4 group-hover:text-teal-400 transition-colors text-white">{project.title}</h3>
                     <p className="text-slate-400 font-light mb-10 leading-relaxed line-clamp-3 text-lg">{project.description}</p>

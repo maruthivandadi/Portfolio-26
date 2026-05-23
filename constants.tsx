@@ -21,8 +21,8 @@ export const PROJECTS: Project[] = [
     icon: "BrainCircuit"
   },
   {
-    title: "Intelligent To-Do",
-    description: "Beyond a simple list, this tool uses task prioritization logic to manage complex workflows efficiently.",
+    title: "Shikshak Guide",
+    description: "Shikshak Guide is an AI-enhanced digital hub designed to streamline educational workflows and resource management for modern educators.",
     tech: ["JavaScript", "Tailwind CSS", "Local Storage"],
     link: "#",
     icon: "Layers"
@@ -45,9 +45,19 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCES: Experience[] = [
   {
+    role: "AI-Intern",
+    company: "Proddy AI",
+    period: "Apr 2026 – Present",
+    description: [
+      "Product Enhancement: Dedicated to evolving existing software through intelligent automation.",
+      "Recently introduced the AI_Task_Blocking_Detector feature, enhancing product utility by automating the detection of task dependencies and blockers.",
+      "Focused on delivering production-ready AI solutions within established development lifecycles."
+    ]
+  },
+  {
     role: "Research & Development Intern",
     company: "Krytil",
-    period: "Dec 2025 – Present",
+    period: "Dec 2025 – Mar 2026",
     description: [
       "Contributing to research-driven projects focused on automation and data extraction.",
       "Developing scripts to extract fresher job data from company career pages.",
