@@ -17,21 +17,21 @@ export const PROJECTS: Project[] = [
     title: "AI Planner",
     description: "A personalized intelligent planning system powered by Google AI Studio, designed to optimize daily productivity.",
     tech: ["Google AI Studio", "React", "TypeScript"],
-    link: "#",
+    link: "https://to-do-list-app-three-ashy.vercel.app/",
     icon: "BrainCircuit"
   },
   {
     title: "Shikshak Guide",
     description: "Shikshak Guide is an AI-enhanced digital hub designed to streamline educational workflows and resource management for modern educators.",
     tech: ["JavaScript", "Tailwind CSS", "Local Storage"],
-    link: "#",
+    link: "https://shikshak-guide.netlify.app/",
     icon: "Layers"
   },
   {
     title: "Interactive Counter",
     description: "A sleek, responsive interactive counter showcasing precise DOM manipulation and modern UI principles.",
     tech: ["JavaScript", "CSS3", "HTML5"],
-    link: "#",
+    link: "https://maruthi-vandadi-counter.netlify.app/",
     icon: "Target"
   },
   {
