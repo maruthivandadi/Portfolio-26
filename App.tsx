@@ -977,10 +977,10 @@ const App: React.FC = () => {
               <div className="flex flex-wrap justify-center gap-6 mb-24">
                  <motion.a 
                   whileHover={{ scale: 1.05, y: -5 }}
-                  href="mailto:maruthi8807@gmail.com" 
+                  href="mailto:maruthivandadi@gmail.com"
                   className="glass px-10 py-5 rounded-2xl border border-white/5 flex items-center gap-4 transition-all group text-lg text-white"
-                >
-                  <Mail size={24} className="text-teal-400" /> maruthi8807@gmail.com
+                  >
+                  <Mail size={24} className="text-teal-400" /> maruthivandadi@gmail.com
                 </motion.a>
                 <motion.a 
                   whileHover={{ scale: 1.05, y: -5 }}
